@@ -1,6 +1,6 @@
 # How to Run React App
 ### `git clone` this project
-### `cd grow-therapy-frontend`
+### `cd wiki-articles-website`
 ### `npm install`
 ### `npm start`
 ## visit [http://localhost:3000](http://localhost:3000)
