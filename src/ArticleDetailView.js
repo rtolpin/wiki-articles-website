@@ -14,7 +14,7 @@ class ArticleDetailView extends React.Component{
     }
 
     async getWikiPage(){
-        const special_cases = {'CEO': 'Chief_executive_officer', 'Viscus': 'Organ_(biology)'};
+        const special_cases = {'CEO': 'Chief_executive_officer', 'Video_hosting_service': 'Online_video_platform', 'Viscus': 'Organ_(biology)'};
         const article_name = !(this.props.article in special_cases) ? this.props.article : special_cases[this.props.article];
         const url = 'https://en.wikipedia.org/w/api.php?' +
             new URLSearchParams({
