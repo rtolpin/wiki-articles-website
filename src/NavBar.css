@@ -1,0 +1,10 @@
+.small-logo{
+    width: 20vh;
+}
+
+#home-navigation{
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+    background: transparent;
+}
