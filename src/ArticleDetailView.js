@@ -5,12 +5,22 @@ class ArticleDetailView extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {title: undefined, details: undefined, page_views: undefined, error: undefined};
+        this.state = {title: undefined, details: undefined, detailsPartTwo: undefined, showTwo: false, showThree: false, page_views: undefined, error: undefined};
+        this.showPartTwo = this.showPartTwo.bind(this);
+        this.showPartThree = this.showPartThree.bind(this);
     }
 
     componentDidMount(){
         this.getWikiPage();
         this.getPageViewsPerDay();
+    }
+
+    showPartTwo(e){
+        this.setState({showTwo: true});
+    }
+
+    showPartThree(e){
+        this.setState({showThree: true});
     }
 
     async getWikiPage(){
@@ -32,7 +42,9 @@ class ArticleDetailView extends React.Component{
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
                 const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && ele.innerText.length > 40 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
                 const textContent = elements[0].textContent;
-                this.setState({title: json.parse.title, details: textContent, error: undefined});
+                const textContentPartTwo = elements[1].textContent;
+                const textContentPartThree = elements[2].textContent;
+                this.setState({title: json.parse.title, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, error: undefined});
             }else{
                 this.setState({error: 'Details Not Found.'});
             }
@@ -70,7 +82,9 @@ class ArticleDetailView extends React.Component{
                {this.state.error && <div>{this.state.error}</div>}
                {!this.state.title && !this.state.details && !this.state.error && <div><strong><span>Fetching Details...</span></strong></div>}
                {this.state.title && <div><strong>Title: {this.state.title}</strong></div>}
-               {this.state.details && <div>Details: {this.state.details}</div>}
+               {this.state.details && <div>Details: {this.state.details}<br/>{!(this.state.showTwo) && <strong><a value={this.state.showTwo} onClick={this.showPartTwo} className='blue-text'>View more...</a></strong>}</div>}
+               {this.state.detailsPartTwo && this.state.showTwo && <div>{this.state.detailsPartTwo}<br/>{!(this.state.showThree) && <strong><a value={this.state.showThree} onClick={this.showPartThree} className='blue-text'>View more...</a></strong>}</div>}
+               {this.state.detailsPartThree && this.state.showThree && <div>{this.state.detailsPartThree}</div>}
                {this.state.page_views && 
                 (<div>
                 {

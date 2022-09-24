@@ -2,3 +2,8 @@
     margin-left: 5px;
     vertical-align: middle;
 }
+
+.blue-text{
+    color: rgb(102, 102, 194);
+    cursor: pointer;
+}
