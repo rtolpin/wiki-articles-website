@@ -14,7 +14,8 @@ class ArticleDetailView extends React.Component{
     }
 
     async getWikiPage(){
-        const article_name = this.props.article;
+        const special_cases = {'CEO': 'Chief_executive_officer', 'Viscus': 'Organ_(biology)'};
+        const article_name = !(this.props.article in special_cases) ? this.props.article : special_cases[this.props.article];
         const url = 'https://en.wikipedia.org/w/api.php?' +
             new URLSearchParams({
                 origin: '*',
@@ -29,8 +30,7 @@ class ArticleDetailView extends React.Component{
             if(json?.parse?.text){
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
-                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && ele.innerText.length > 30 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
-                console.log(elements);
+                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && ele.innerText.length > 40 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
                 const textContent = elements[0].textContent;
                 this.setState({title: json.parse.title, details: textContent, error: undefined});
             }else{
