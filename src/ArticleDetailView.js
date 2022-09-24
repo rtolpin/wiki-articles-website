@@ -29,7 +29,8 @@ class ArticleDetailView extends React.Component{
             if(json?.parse?.text){
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
-                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
+                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && ele.innerText.length > 30 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
+                console.log(elements);
                 const textContent = elements[0].textContent;
                 this.setState({title: json.parse.title, details: textContent, error: undefined});
             }else{
