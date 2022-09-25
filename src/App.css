@@ -19,7 +19,7 @@
   .align-language-select{
     display: flex;
     margin-bottom: 5px;
-    margin-top: 5vh;
+    margin-top: 2vh;
   }
   
   .error-message{
@@ -61,11 +61,11 @@
   }
   .form-select{
     max-width: 115px;
-    margin-left: -5vw;
+    margin-left: -8vw;
   }
   .form-control{
     margin-top: 3.5vh;
-    max-width: 140px;
+    max-width: 145px;
     margin-left: -5vw;
   }
   .date-title{
@@ -76,7 +76,7 @@
     word-break: break-word;
   }
   .container-fluid{
-    margin-left: -70vmin;
+    margin-left: -77vmin;
     width: inherit;
     margin-top: 25px;
     margin-bottom: 25px;
