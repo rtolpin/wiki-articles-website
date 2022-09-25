@@ -14,6 +14,7 @@ class DateSelector extends React.Component{
         const new_value = e.target['value'];
         if(this.state.date !== new_value){
             this.setState({date: new_value});
+            this.props.setCurrentDate(String(new_value));
         }else if(this.state.date === new_value){
             this.setState({date: ''});
         }

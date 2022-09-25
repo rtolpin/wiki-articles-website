@@ -11,10 +11,11 @@ class App extends React.Component {
     super(props);
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
-    this.state = {articles: [], dateString: '', yesterday: yesterday, country_code: 'en', error: undefined};
+    this.state = {articles: [], dateString: '', yesterday: yesterday, current_date: '', country_code: 'en', error: undefined};
     this.getDateFormat = this.getDateFormat.bind(this);
     this.getDataFetch = this.getDataFetch.bind(this);
     this.changeLanguageSelection = this.changeLanguageSelection.bind(this);
+    this.setCurrentDate = this.setCurrentDate.bind(this);
   }
 
   componentDidMount(){
@@ -30,10 +31,15 @@ class App extends React.Component {
     if(date instanceof Date){
       const dateString = date.toLocaleString('en-us', {year: 'numeric', month: '2-digit', day: '2-digit'}).replace(/(\d+)\/(\d+)\/(\d+)/, `$3${replace_delimiter}$1${replace_delimiter}$2`);
       return dateString;
-    } else if (date instanceof String){
+    } else if (date instanceof String || typeof date === 'string'){
       const elements = date.split(orig_delimiter);
-      const dateString = elements[2] + replace_delimiter + elements[0] + replace_delimiter + elements[1];
-      return dateString;
+      if(elements[2].length === 4){
+        const dateString = elements[2] + replace_delimiter + elements[0] + replace_delimiter + elements[1];
+        return dateString;
+      }else if(elements[0].length === 4){
+        const dateString = elements[0] + replace_delimiter + elements[1] + replace_delimiter + elements[2];
+        return dateString;
+      }
     }
     return '';
   }
@@ -52,8 +58,16 @@ class App extends React.Component {
   } 
 
   changeLanguageSelection(country_code){
-    this.getDataFetch(this.getDateFormat(this.state.yesterday, '/'), country_code);
+    if(this.state.current_date){
+      this.getDataFetch(this.getDateFormat(String(this.state.current_date), '-'), country_code);
+    }else{
+      this.getDataFetch(this.getDateFormat(this.state.yesterday, '/'), country_code);
+    }
     this.setState({country_code: country_code});
+  }
+
+  setCurrentDate(date){
+    this.setState({current_date: date});
   }
 
   render(){
@@ -63,7 +77,7 @@ class App extends React.Component {
           <NavBar/>
           <div className='align-selection'>
             <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
-            <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code}/>
+            <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code} setCurrentDate={this.setCurrentDate}/>
             <NumResultSelect articles={this.state.articles} language={this.state.country_code}/>
             {this.state.error ? <div className='error-message'><h4>{'Error fetching Wikipedia articles: ' + this.state.error}</h4></div> : null}
           </div>
