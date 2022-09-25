@@ -52,10 +52,10 @@ class ArticleDetailView extends React.Component{
             if(json?.parse?.text){
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
-                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && ele.innerText.length > 40 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
-                const textContent = elements[0].textContent;
-                const textContentPartTwo = elements[1].textContent;
-                const textContentPartThree = elements[2].textContent;
+                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('km²')) && ele.innerText.length > 40 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
+                const textContent = elements[0].textContent + '\n' + elements[1].textContent;
+                const textContentPartTwo = elements[2].textContent + '\n' + elements[3].textContent;
+                const textContentPartThree = elements[4].textContent + '\n' + elements[5].textContent;
                 this.setState({title: json.parse.title, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, error: undefined});
             }else{
                 this.setState({error: 'Details Not Found.'});

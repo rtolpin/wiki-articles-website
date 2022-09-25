@@ -8,7 +8,6 @@ function NavBar() {
 
     useEffect(() => {      
         window.onscroll =()=>{
-            console.log(window.scrollY);
             const newScrollHeight = Math.ceil(window.scrollY / 1000) *1000;
             if(window.scrollY === 0){
                 setState({opacity: 1});
