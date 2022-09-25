@@ -74,7 +74,7 @@ class ArticleDetailView extends React.Component{
         const day = today.getDate();
         const month_two_digit = month.toString().length === 1 ? '0' + month : month;
         const day_two_digit = day.toString().length === 1 ? '0' + day : day;
-        const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents/${article_name}/daily/${year}${month_two_digit}01/${year}${month_two_digit}${day_two_digit}`;
+        const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/${this.props.language_code}.wikipedia/all-access/all-agents/${article_name}/daily/${year}${month_two_digit}01/${year}${month_two_digit}${day_two_digit}`;
         const header = { headers: {'Content-Type': 'application/json'}};
         try {
             const req = await fetch(url, header);
