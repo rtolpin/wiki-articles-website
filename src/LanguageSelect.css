@@ -1,0 +1,16 @@
+.align-elements{
+    display: inline;
+    align-items: left;
+    margin-left: 30px;
+}
+
+.form-select{
+    width: 35vmin;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.language-select-title{
+    margin-left: auto;
+    margin-right: auto;
+}
