@@ -1,4 +1,4 @@
-### Live Website Link: https://react-wikipedia-articles.uk.r.appspot.com
+### Live Website Link: https://wikipages.us and https://react-wikipedia-articles.uk.r.appspot.com
 # How to Run React App
 ### `git clone` this project
 ### `cd wiki-articles-website`
