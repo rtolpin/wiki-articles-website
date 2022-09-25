@@ -42,6 +42,14 @@
       margin-top: 13.5px;
       font-size: 1.5vw;
   }
+
+  .container-fluid{
+    margin-left: -80vmin;
+    width: inherit;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    z-index: 1;
+  }
 }
 
 @media only screen and (max-device-width: 480px){
