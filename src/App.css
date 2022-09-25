@@ -17,14 +17,16 @@
   }
   .container-fluid{
     max-width: 480px;
-    margin-left: -70vw;
+    margin-left: -75vw;
   }
   .form-select{
-    max-width: 100px;
+    max-width: 115px;
+    margin-left: -5vw;
   }
   .form-control{
     margin-top: 3.5vh;
     max-width: 140px;
+    margin-left: -5vw;
   }
   .date-title{
     margin-bottom: 0;
