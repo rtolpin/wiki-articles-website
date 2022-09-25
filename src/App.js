@@ -63,7 +63,7 @@ class App extends React.Component {
           <NavBar/>
           <div className='align-selection'>
             <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
-            <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat}/>
+            <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code}/>
             <NumResultSelect articles={this.state.articles} language={this.state.country_code}/>
             {this.state.error ? <div className='error-message'><h4>{'Error fetching Wikipedia articles: ' + this.state.error}</h4></div> : null}
           </div>

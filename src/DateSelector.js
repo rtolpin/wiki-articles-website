@@ -21,7 +21,7 @@ class DateSelector extends React.Component{
             const m = moment(new_value, 'YYYY-MM-DD');
             if (m.isValid()){
                 const valid_date = m.format('YYYY/MM/DD');
-                this.props.fetchData(valid_date);
+                this.props.fetchData(valid_date, this.props.language);
             }
         }
     }
