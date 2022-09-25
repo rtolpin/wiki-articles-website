@@ -29,6 +29,7 @@
     align-content: left;
     justify-content: left;
     font-size: 2vw;
+    word-break: break-word;
 }
 
 .article-views, .article-rank{

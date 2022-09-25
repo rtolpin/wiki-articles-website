@@ -10,7 +10,7 @@
   /*pointer-events: none;*/
 }
 
-@media only screen and (min-device-width: 485px){
+@media only screen and (min-device-width: 485px) and (orientation: landscape){
   .align-selection{
     display: flex;
     margin-top: 25vh;
@@ -36,11 +36,13 @@
     align-content: left;
     justify-content: left;
     font-size: 2vw;
+    word-break: break-word;
   }
 
   .article-views, .article-rank{
       margin-top: 13.5px;
       font-size: 1.5vw;
+      word-break: break-word;
   }
 
   .container-fluid{
@@ -52,10 +54,10 @@
   }
 }
 
-@media only screen and (max-device-width: 480px){
+@media only screen and (max-device-width: 480px) and (orientation: portrait){
   .align-selection{
     display: inline-block;
-    max-width: 482px;
+    max-width: device-width;
   }
   .form-select{
     max-width: 115px;
@@ -71,9 +73,10 @@
   }
   .article-title, .article-views, .article-rank{
     font-size: 3.5vw;
+    word-break: break-word;
   }
   .container-fluid{
-    margin-left: -80vmin;
+    margin-left: -70vmin;
     width: inherit;
     margin-top: 25px;
     margin-bottom: 25px;
