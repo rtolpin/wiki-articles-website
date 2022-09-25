@@ -19,7 +19,6 @@
   .align-language-select{
     display: flex;
     margin-bottom: 5px;
-    margin-top: 2vh;
   }
   
   .error-message{
