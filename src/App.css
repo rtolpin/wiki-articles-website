@@ -45,6 +45,12 @@
   margin-top: 25vh;
 }
 
+.align-language-select{
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 5vh;
+}
+
 .error-message{
   margin-top: 20vh;
   padding: 10vh;

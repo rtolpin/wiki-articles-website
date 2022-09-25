@@ -20,7 +20,7 @@ function NumResultSelect(props){
                     <option value='400'>400</option>
                     <option value='500'>500</option>
                 </Form.Select>
-                <ContainerGrid numRows={state.rows} articles={props.articles} className='container-center'/>
+                <ContainerGrid numRows={state.rows} articles={props.articles} language={props.language} className='container-center'/>
             </div>
         </>
     );

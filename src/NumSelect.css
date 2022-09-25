@@ -1,13 +1,11 @@
 .align-elements{
     display: inline;
     align-items: left;
-    margin-left: 30px;
+    margin-left: 35px;
 }
 
 .form-select{
-    width: 35vmin;
-    margin-left: auto;
-    margin-right: auto;
+    width: 25vmin;
 }
 
 .results-title{
@@ -15,10 +13,11 @@
     margin-right: auto;
 }
 .container-fluid{
-    margin-left: -40vmin;
+    margin-left: -80vmin;
     width: inherit;
     margin-top: 25px;
     margin-bottom: 25px;
+    z-index: 1;
 }
 
 .container-grid{

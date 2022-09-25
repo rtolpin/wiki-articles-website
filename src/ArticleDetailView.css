@@ -7,3 +7,7 @@
     color: rgb(102, 102, 194);
     cursor: pointer;
 }
+
+.wiki-text{
+    font-size: medium;
+}

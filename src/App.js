@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './NavBar';
 import DateSelector from './DateSelector';
 import NumResultSelect from './NumSelect';
+import LanguageSelect from './LanguageSelect';
 import './App.css';
 
 class App extends React.Component {
@@ -10,9 +11,10 @@ class App extends React.Component {
     super(props);
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
-    this.state = {articles: [], dateString: '', yesterday: yesterday, error: undefined};
+    this.state = {articles: [], dateString: '', yesterday: yesterday, country_code: 'en', error: undefined};
     this.getDateFormat = this.getDateFormat.bind(this);
     this.getDataFetch = this.getDataFetch.bind(this);
+    this.changeLanguageSelection = this.changeLanguageSelection.bind(this);
   }
 
   componentDidMount(){
@@ -36,9 +38,9 @@ class App extends React.Component {
     return '';
   }
 
-  async getDataFetch(dateString){
+  async getDataFetch(dateString, countryCode='en'){
     const response =
-      await fetch(`https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/${dateString}`,
+      await fetch(`https://wikimedia.org/api/rest_v1/metrics/pageviews/top/${countryCode}.wikipedia/all-access/${dateString}`,
         { headers: {'Content-Type': 'application/json'}}
       );
     const response_json = await response.json();
@@ -49,14 +51,20 @@ class App extends React.Component {
     }
   } 
 
+  changeLanguageSelection(country_code){
+    this.getDataFetch(this.getDateFormat(this.state.yesterday, '/'), country_code);
+    this.setState({country_code: country_code});
+  }
+
   render(){
     return (
       <div className='App'>
         <header className='App-header'>
           <NavBar/>
           <div className='align-selection'>
+            <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
             <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat}/>
-            <NumResultSelect articles={this.state.articles}/>
+            <NumResultSelect articles={this.state.articles} language={this.state.country_code}/>
             {this.state.error ? <div className='error-message'><h4>{'Error fetching Wikipedia articles: ' + this.state.error}</h4></div> : null}
           </div>
         </header>
