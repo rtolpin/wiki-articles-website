@@ -6,9 +6,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 function CategorySearch(props){
     const [state, setState] = useState({width: '40vmin', text: '', results: [], error: undefined, subCats: []});
 
-    const categoryMap = {'ar': 'فئة', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주'};
+    const categoryMap = {'ar': 'فئة', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주', 'nl': 'Categorie'};
 
-    const languageKey = {'ar': 'Arabic', 'en': 'English', 'de': 'German', 'he': 'Hebrew', 'fr': 'French', 'es': 'Spanish', 'it': 'Italian', 'uk': 'Ukrainian', 'uz': 'Uzbek', 'sv': 'Swedish', 'ja': 'Japanese', 'pt': 'Portuguese', 'pl': 'Polish', 'ko': 'Korean'};
+    const languageKey = {'ar': 'Arabic', 'en': 'English', 'de': 'German', 'he': 'Hebrew', 'fr': 'French', 'es': 'Spanish', 'it': 'Italian', 'uk': 'Ukrainian', 'uz': 'Uzbek', 'sv': 'Swedish', 'ja': 'Japanese', 'pt': 'Portuguese', 'pl': 'Polish', 'ko': 'Korean', 'nl': 'Dutch'};
 
     const makeRequestCategories = async (searchTerm) => {
         const url = `https://${props.language}.wikipedia.org/w/api.php?` +
@@ -48,7 +48,7 @@ function CategorySearch(props){
 
     return(
         <div className='align-elements'>
-            <span className='search-title'>Search By Category {(props.language in languageKey) ? `(search in ${languageKey[props.language]})` : ''}</span>
+            <span className='search-title'>Search By Category</span>
             <div style={{width: state.width}} onKeyDown={(e) => {if(e.key === 'Backspace'){setState({width: '40vmin'})} else{setState({width: '100vmin'})}}}>
                 {(props.language in languageKey) ? (<Form.Control type='text' size='md' placeholder={'Search in ' + languageKey[props.language]} value={state.text} onChange={setSearchTerm}/>) : (<Form.Control type='text' size='md' placeholder={'Search By Category'} disabled={true} style={{'background-color': '#CCC'}}/>)}
             </div>

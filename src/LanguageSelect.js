@@ -12,6 +12,7 @@ function LanguageSelect(props){
                 <span className='language-select-title'>Select Language:</span>
                 <Form.Select defaultValue={'en'} onChange={(e) => {props.changeLanguageSelection(e.currentTarget.value); setState({country_code: e.currentTarget.value});}}>
                     <option value='ar'>Arabic</option>
+                    <option value='nl'>Dutch</option>
                     <option value='en'>English</option>
                     <option value='fr'>French</option>
                     <option value='ka'>Georgian</option>

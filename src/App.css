@@ -81,6 +81,9 @@
     max-width: 160px;
     margin-left: -5vw;
   }
+  .align-elements{
+    max-width: 115px;
+  }
   .date-title{
     margin-bottom: 0;
   }
