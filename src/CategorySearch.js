@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 function CategorySearch(props){
     const [state, setState] = useState({text: '', results: [], error: undefined, subCats: []});
 
-    const categoryMap = {'ar': 'فئة', 'af': '', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주', 'nl': 'Categorie', 'ka': 'კატეგორია', 'hi': 'श्रेणी', 'sr': 'Категорија', 'pa': 'ਸ਼੍ਰੇਣੀ', 'tr': 'Kategori', 'vi': 'Loại'};
+    const categoryMap = {'ar': 'فئة', 'af': 'Kategorie', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주', 'nl': 'Categorie', 'ka': 'კატეგორია', 'hi': 'श्रेणी', 'sr': 'Категорија', 'pa': 'ਸ਼੍ਰੇਣੀ', 'tr': 'Kategori', 'vi': 'Loại'};
 
     const languageKey = {'ar': 'Arabic', 'af': 'Afrikaans', 'en': 'English', 'de': 'German', 'he': 'Hebrew', 'fr': 'French', 'es': 'Spanish', 'it': 'Italian', 'uk': 'Ukrainian', 'uz': 'Uzbek', 'sv': 'Swedish', 'ja': 'Japanese', 'pt': 'Portuguese', 'pl': 'Polish', 'ko': 'Korean', 'nl': 'Dutch', 'ka': 'Georgian', 'hi': 'Hindi', 'sr': 'Serbian', 'pa': 'Punjabi', 'tr': 'Turkish', 'vi': 'Vietnamese'};
 
