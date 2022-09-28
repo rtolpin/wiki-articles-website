@@ -1,10 +1,4 @@
 ### Live Website Link: https://wikipages.us and https://react-wikipedia-articles.uk.r.appspot.com
-# How to Run React App
-### `git clone` this project
-### `cd wiki-articles-website`
-### `npm install`
-### `npm start`
-## visit [http://localhost:3000](http://localhost:3000)
 
 # Documentation for API Endpoints
 
