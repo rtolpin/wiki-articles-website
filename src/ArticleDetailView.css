@@ -8,11 +8,16 @@
     cursor: pointer;
 }
 
-.wiki-text{
+.wiki-text, .error-text{
     display: inline-block;
     font-size: medium;
     text-align: center;
+    margin-left: 50vmin;
     width: 90vmin;
+}
+
+.wiki-title{
+    text-align: center;
 }
 
 .text-container{

@@ -91,9 +91,9 @@ class ArticleDetailView extends React.Component{
     render(){
         return (
             <div className='text-container'>
-               {this.state.error && <div>{this.state.error}</div>}
+               {this.state.error && <div className='error-text'>{this.state.error}</div>}
                {!this.state.title && !this.state.details && !this.state.error && <div><strong><span>Fetching Details...</span></strong></div>}
-               {this.state.title && <div><strong>{this.state.title}</strong></div>}
+               {this.state.title && <div className='wiki-title'><strong>{this.state.title}</strong></div>}
                {this.state.details && <div className='wiki-text'>{this.state.details}<br/>{!(this.state.showTwo) && <strong><span value={this.state.showTwo} onClick={this.showPartTwo} className='blue-text'>View more...</span></strong>}</div>}
                {this.state.detailsPartTwo && this.state.showTwo && <><br/><div className='wiki-text'>{this.state.detailsPartTwo}<br/>{!(this.state.showThree) && <strong><span value={this.state.showThree} onClick={this.showPartThree} className='blue-text'>View more...</span></strong>}</div></>}
                {this.state.detailsPartThree && this.state.showThree && <><br/><div className='wiki-text'>{this.state.detailsPartThree}<br/>{!(this.state.showViewsPerDay) && <strong><span value={this.state.showViewsPerDay} onClick={this.showViews} className='blue-text'>View more...</span></strong>}</div></>}

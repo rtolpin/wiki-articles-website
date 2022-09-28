@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
   overflow: 'scroll';
 }
 
@@ -51,8 +51,12 @@
     margin-left: auto;
     margin-right: auto;
   }
-  .form-select{
+  .results-select, .results-title{
     width: 35vmin;
+    margin-left: -30vmin;
+  }
+  .form-control, .btn{
+    border-radius: 0.05;
   }
   .container-fluid{
     position: relative;

@@ -1,7 +1,6 @@
 .align-elements{
     display: inline;
     align-items: left;
-    margin-left: 35px;
 }
 
 .form-select{
@@ -9,6 +8,5 @@
 }
 
 .results-title{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
 }

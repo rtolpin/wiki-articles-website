@@ -5,7 +5,7 @@
     margin-left: 15px;
     padding: 10px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0;
 }
 
 .search-title{
@@ -13,7 +13,24 @@
 }
 
 .align-elements{
-    display: inline;
+    display: flex;
     margin-top: 3.5vh;
     overflow-x: scroll;
+}
+
+.form{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.expand-row{
+    width: 100vmin;
+}
+
+.submit-button-col{
+    width: 10vmin;
+}
+
+.search-title{
+    margin-left: 0;
 }
