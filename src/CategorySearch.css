@@ -1,0 +1,19 @@
+.form-control-lg{
+    height: 5vmin;
+    width: 40vmin;
+    max-height: 2px;
+    margin-left: 15px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-title{
+    font-size: 2vmin;
+}
+
+.align-elements{
+    display: inline;
+    margin-top: 3.5vh;
+    overflow-x: scroll;
+}

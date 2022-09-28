@@ -3,6 +3,8 @@ import NavBar from './NavBar';
 import DateSelector from './DateSelector';
 import NumResultSelect from './NumSelect';
 import LanguageSelect from './LanguageSelect';
+import CategorySearch from './CategorySearch';
+import ContainerGrid from './ContainerInfo';
 import './App.css';
 
 class App extends React.Component {
@@ -11,11 +13,13 @@ class App extends React.Component {
     super(props);
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
-    this.state = {articles: [], dateString: '', yesterday: yesterday, current_date: '', country_code: 'en', error: undefined};
+    this.state = {articles: [], dateString: '', yesterday: yesterday, current_date: '', country_code: 'en', numResults: 100, category: '', error: undefined, isCategorySearch: false};
     this.getDateFormat = this.getDateFormat.bind(this);
     this.getDataFetch = this.getDataFetch.bind(this);
     this.changeLanguageSelection = this.changeLanguageSelection.bind(this);
     this.setCurrentDate = this.setCurrentDate.bind(this);
+    this.setNumResults = this.setNumResults.bind(this);
+    this.setResultsFromCategorySearch = this.setResultsFromCategorySearch.bind(this);
   }
 
   componentDidMount(){
@@ -44,6 +48,10 @@ class App extends React.Component {
     return '';
   }
 
+  setNumResults(results){
+    this.setState({numResults: results});
+  }
+
   async getDataFetch(dateString, countryCode='en'){
     const response =
       await fetch(`https://wikimedia.org/api/rest_v1/metrics/pageviews/top/${countryCode}.wikipedia/all-access/${dateString}`,
@@ -51,11 +59,13 @@ class App extends React.Component {
       );
     const response_json = await response.json();
     if(response_json?.items?.length > 0){
-      this.setState({articles: response_json.items[0].articles, error: undefined});
+      this.setState({articles: response_json.items[0].articles, error: undefined, isCategorySearch: false});
     } else {
-      this.setState({error: response_json.detail, articles: []});
+      this.setState({error: response_json.detail, articles: [], isCategorySearch: false});
     }
   } 
+
+
 
   changeLanguageSelection(country_code){
     if(this.state.current_date){
@@ -70,6 +80,10 @@ class App extends React.Component {
     this.setState({current_date: date});
   }
 
+  setResultsFromCategorySearch(articles, category){
+    this.setState({articles: articles, category: category, isCategorySearch: true});
+  }
+
   render(){
     return (
       <div className='App'>
@@ -78,9 +92,11 @@ class App extends React.Component {
           <div className='align-selection'>
             <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
             <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code} setCurrentDate={this.setCurrentDate}/>
-            <NumResultSelect articles={this.state.articles} language={this.state.country_code}/>
+            <CategorySearch language={this.state.country_code} results={this.setResultsFromCategorySearch}/>
+            <NumResultSelect articles={this.state.articles} language={this.state.country_code} setNumResults={this.setNumResults}/>
             {this.state.error ? <div className='error-message'><h4>{'Error fetching Wikipedia articles: ' + this.state.error}</h4></div> : null}
           </div>
+          <ContainerGrid numRows={this.state.numResults} articles={this.state.articles} language={this.state.country_code} category={this.state.category} categorySearch={this.state.isCategorySearch} className='container-center'/>
         </header>
       </div>
     );

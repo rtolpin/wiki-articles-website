@@ -9,5 +9,12 @@
 }
 
 .wiki-text{
+    display: inline-block;
     font-size: medium;
+    text-align: center;
+    width: 90vmin;
+}
+
+.text-container{
+    overflow: auto;
 }

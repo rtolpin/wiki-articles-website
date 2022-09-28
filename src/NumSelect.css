@@ -5,23 +5,10 @@
 }
 
 .form-select{
-    width: 25vmin;
+    width: 15vmin;
 }
 
 .results-title{
     margin-left: auto;
     margin-right: auto;
-}
-.container-fluid{
-    margin-left: -80vmin;
-    width: inherit;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    z-index: 1;
-}
-
-.container-grid{
-    margin-top: 25vh;
-    display: relative;
-    align-items: left;
 }
