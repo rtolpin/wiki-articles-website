@@ -35,7 +35,6 @@ function CategorySearch(props){
             if(json?.query?.categorymembers && json?.query?.categorymembers.length > 0){
                 const articles = json.query.categorymembers;
                 const subcats = articles.filter(a => a.title.includes(`${categoryMap[props.language]}:`));
-                console.log(subcats);
                 articles.sort((a,b) => a.title.includes(`${categoryMap[props.language]}:`) - b.title.includes(`${categoryMap[props.language]}:`));
                 props.results(articles, searchTerm);
                 setState({results: articles, error: undefined, subCats: subcats});
