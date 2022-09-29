@@ -85,6 +85,10 @@
     max-width: 160px;
     margin-left: -5vw;
   }
+  .search-term{
+    min-width: 50px;
+    max-width: 115px;
+  }
   .align-elements{
     max-width: 115px;
   }
