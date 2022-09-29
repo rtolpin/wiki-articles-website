@@ -85,15 +85,15 @@ class ArticleDetailView extends React.Component{
                 const elements = Array.from(doc.querySelectorAll('p, li, div, a')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('km²')) && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
                 const text = elements.map(ele => ele.textContent);
                 const offset = Math.floor(text.length/9);
-                const textContent = [...new Set(text.splice(0,offset))];
-                const textContentPartTwo = [...new Set(text.splice(offset, offset*2))];
-                const textContentPartThree = [...new Set(text.splice(offset*2, offset*3))];
-                const textContentPartFour = [...new Set(text.splice(offset*3, offset*4))];
-                const textContentPartFive = [...new Set(text.splice(offset*4, offset*5))];
-                const textContentPartSix = [...new Set(text.splice(offset*5, offset*6))]
-                const textContentPartSeven = [...new Set(text.splice(offset*6, offset*7))];
-                const textContentPartEight = [...new Set(text.splice(offset*7, offset*8))];
-                const textContentPartNine = [...new Set(text.splice(offset*8, offset*9))];
+                const textContent = [...new Set(text.splice(0,offset))].map(ele => ele + '  ');
+                const textContentPartTwo = [...new Set(text.splice(offset, offset*2))].map(ele => ele + '  ');
+                const textContentPartThree = [...new Set(text.splice(offset*2, offset*3))].map(ele => ele + '  ');
+                const textContentPartFour = [...new Set(text.splice(offset*3, offset*4))].map(ele => ele + '  ');
+                const textContentPartFive = [...new Set(text.splice(offset*4, offset*5))].map(ele => ele + '  ');
+                const textContentPartSix = [...new Set(text.splice(offset*5, offset*6))].map(ele => ele + '  ')
+                const textContentPartSeven = [...new Set(text.splice(offset*6, offset*7))].map(ele => ele + '  ');
+                const textContentPartEight = [...new Set(text.splice(offset*7, offset*8))].map(ele => ele + '  ');
+                const textContentPartNine = [...new Set(text.splice(offset*8, offset*9))].map(ele => ele + '  ');
                 this.setState({title: json.parse.title, detailsPartNine: textContentPartNine, detailsPartEight: textContentPartEight, detailsPartSeven: textContentPartSeven, detailsPartSix: textContentPartSix, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, detailsPartFour: textContentPartFour, detailsPartFive: textContentPartFive, error: undefined});
             }else{
                 this.setState({error: 'Details Not Found.'});
