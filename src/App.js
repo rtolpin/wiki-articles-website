@@ -88,7 +88,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <NavBar/>
+          <NavBar language={this.state.country_code}/>
           <div className='align-selection'>
             <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
             <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code} setCurrentDate={this.setCurrentDate}/>
