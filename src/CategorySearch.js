@@ -35,6 +35,7 @@ function CategorySearch(props){
             if(json?.query?.categorymembers && json?.query?.categorymembers.length > 0){
                 const articles = json.query.categorymembers;
                 const subcats = articles.filter(a => a.title.includes(`${categoryMap[props.language]}:`));
+                console.log(subcats);
                 articles.sort((a,b) => a.title.includes(`${categoryMap[props.language]}:`) - b.title.includes(`${categoryMap[props.language]}:`));
                 props.results(articles, searchTerm);
                 setState({results: articles, error: undefined, subCats: subcats});
@@ -70,12 +71,19 @@ function CategorySearch(props){
         <div className='align-elements'>
             <span className='search-title'>Search By Category</span>
             <div onKeyDown={(e) => {if(e.key === 'Backspace'){setState({error: undefined})}}}>
-                {(props.language in languageKey) ? (<Form onSubmit={submitSearch} className='form'><Form.Group as={Row} className='expand-row'><Col className='search-term' style={{width: '80vmin', 'border-radius': '75%'}}><Form.Control type='text' size='md' placeholder={'Search in ' + languageKey[props.language]} value={state.text} onChange={setSearchTerm}/></Col><Col className='submit-button-col' style={{'border-radius': '75%'}}><Button variant='primary' style={{'margin-left': '-4vmin'}} type='submit'>Submit</Button></Col></Form.Group></Form>) : (<Form.Control type='text' size='md' placeholder={'Search By Category'} disabled={true} style={{'background-color': '#CCC'}}/>)}
+                {(props.language in languageKey) ? (<Form onSubmit={submitSearch} className='form'><Form.Group as={Row} className='expand-row'><Col className='search-term' style={{width: '80vmin', borderRadius: '75%'}}><Form.Control type='text' size='md' placeholder={'Search in ' + languageKey[props.language]} value={state.text} onChange={setSearchTerm}/></Col><Col className='submit-button-col' style={{borderRadius: '75%'}}><Button variant='primary' style={{marginLeft: '-4vmin'}} type='submit'>Submit</Button></Col></Form.Group></Form>) : (<Form.Control type='text' size='md' placeholder={'Search By Category'} disabled={true} style={{'background-color': '#CCC'}}/>)}
             </div>
-            {state.error ? (<div style={{'background-color': '#add8e6', 'margin-left': '5px', 'opacity': 0.5, 'width': '55vmin'}}><span style={{color: 'blue'}}>{state.error}</span></div>) : undefined}
-            {state.subCats && state.subCats.length > 0 ? (<div style={{'margin-top': '2px'}}>{state.subCats.map((cat, i) => {
-                if(i % 3 === 0){
-                    const subCatButtons = state.subCats.slice(i-3,i).map((cat, j) =>(<Button variant='primary' size='sm' value={cat.title.replace(categoryMap[props.language] + ':', '')} onClick={setNewCat} style={{'margin-top': '2px', 'margin-left': '2px', 'border-radius': 7}}>{cat.title}</Button>));
+            {state.error ? (<div style={{'background-color': '#add8e6', marginLeft: '5px', 'opacity': 0.5, 'width': '55vmin'}}><span style={{color: 'blue'}}>{state.error}</span></div>) : undefined}
+            {state.subCats && state.subCats.length > 0 ? (<div style={{marginTop: '2px'}}>{state.subCats.map((cat, i) => {
+                if(state.subCats.length <= 3 && i === (state.subCats.length-1)){
+                    const subCatButtons = state.subCats.slice(0,i+1).map((cat, j) =>(<Button variant='primary' size='sm' value={cat.title.replace(categoryMap[props.language] + ':', '')} onClick={setNewCat} style={{marginTop: '2px', marginLeft: '2px', borderRadius: 7}}>{cat.title}</Button>));
+                    return (
+                        <ButtonGroup>
+                            {subCatButtons}
+                        </ButtonGroup>
+                    );
+                } else if(i % 3 === 0){
+                    const subCatButtons = state.subCats.slice(i-3,i).map((cat, j) =>(<Button variant='primary' size='sm' value={cat.title.replace(categoryMap[props.language] + ':', '')} onClick={setNewCat} style={{marginTop: '2px', marginLeft: '2px', borderRadius: 7}}>{cat.title}</Button>));
                     return (
                         <ButtonGroup>
                             {subCatButtons}
