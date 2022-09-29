@@ -53,8 +53,6 @@ function CategorySearch(props){
 
     const submitSearch = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget);
-        console.log(state.text);
         if(state.text !== '' && state.text !== undefined){
             makeRequestCategories(state.text);
         }

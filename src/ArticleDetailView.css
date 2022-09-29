@@ -1,23 +1,39 @@
 .views-day{
     margin-left: 5px;
     vertical-align: middle;
+    text-align: center;
 }
 
 .blue-text{
     color: rgb(102, 102, 194);
     cursor: pointer;
+    font-size: large;
+    margin-bottom: 10px;
 }
 
-.wiki-text, .error-text{
+.page-views{
+    font-weight: 600;
+}
+
+.wiki-text, .error-text, .loading-text{
     display: inline-block;
     font-size: medium;
     text-align: center;
-    margin-left: 50vmin;
-    width: 90vmin;
+    margin-left: 30vmin;
+    width: 110vmin;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+.loading-text{
+    font-size: large;
 }
 
 .wiki-title{
     text-align: center;
+    margin-left: -20vmin;
 }
 
 .text-container{

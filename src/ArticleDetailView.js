@@ -5,9 +5,15 @@ class ArticleDetailView extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {title: undefined, details: undefined, detailsPartTwo: undefined, showTwo: false, showThree: false, showViewsPerDay: false, page_views: undefined, error: undefined};
+        this.state = {title: undefined, details: undefined, detailsPartTwo: undefined, detailsPartThree: undefined, detailsPartFour: undefined, detailsPartFive: undefined, showFive: false, detailsPartSix: undefined, showSix: false, detailsPartSeven: undefined, showSeven: false, detailsPartEight: undefined, showEight: false, detailsPartNine: undefined, showNine: undefined, showTwo: false, showThree: false, showFour: false, showViewsPerDay: false, page_views: undefined, error: undefined};
         this.showPartTwo = this.showPartTwo.bind(this);
         this.showPartThree = this.showPartThree.bind(this);
+        this.showPartFour = this.showPartFour.bind(this);
+        this.showPartFive = this.showPartFive.bind(this);
+        this.showPartSix = this.showPartSix.bind(this);
+        this.showPartSeven = this.showPartSeven.bind(this);
+        this.showPartEight = this.showPartEight.bind(this);
+        this.showPartNine = this.showPartNine.bind(this);
         this.showViews = this.showViews.bind(this);
     }
 
@@ -31,6 +37,30 @@ class ArticleDetailView extends React.Component{
         this.setState({showThree: true});
     }
 
+    showPartFour(e){
+        this.setState({showFour: true});
+    }
+
+    showPartFive(e){
+        this.setState({showFive: true});
+    }
+
+    showPartSix(e){
+        this.setState({showSix: true});
+    }
+
+    showPartSeven(e){
+        this.setState({showSeven: true});
+    }
+
+    showPartEight(e){
+        this.setState({showEight: true});
+    }
+
+    showPartNine(e){
+        this.setState({showNine: true});
+    }
+
     showViews(e){
         this.setState({showViewsPerDay: true})
     }
@@ -52,11 +82,19 @@ class ArticleDetailView extends React.Component{
             if(json?.parse?.text){
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
-                const elements = Array.from(doc.querySelectorAll('p')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('km²')) && ele.innerText.length > 40 && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
-                const textContent = elements[0].textContent + '\n' + elements[1].textContent;
-                const textContentPartTwo = elements[2].textContent + '\n' + elements[3].textContent;
-                const textContentPartThree = elements[4].textContent + '\n' + elements[5].textContent;
-                this.setState({title: json.parse.title, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, error: undefined});
+                const elements = Array.from(doc.querySelectorAll('p, li, div, a')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('km²')) && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
+                const text = elements.map(ele => ele.textContent);
+                const offset = Math.floor(text.length/9);
+                const textContent = text.splice(0,offset).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartTwo = text.splice(offset, offset*2).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartThree = text.splice(offset*2, offset*3).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartFour = text.splice(offset*3, offset*4).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartFive = text.splice(offset*4, offset*5).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartSix = text.splice(offset*5, offset*6).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartSeven = text.splice(offset*6, offset*7).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartEight = text.splice(offset*7, offset*8).reduce((a,b) => a + '\n\t' + b, '');
+                const textContentPartNine = text.splice(offset*8, offset*9).reduce((a,b) => a + '\n\t' + b, '');
+                this.setState({title: json.parse.title, detailsPartNine: textContentPartNine, detailsPartEight: textContentPartEight, detailsPartSeven: textContentPartSeven, detailsPartSix: textContentPartSix, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, detailsPartFour: textContentPartFour, detailsPartFive: textContentPartFive, error: undefined});
             }else{
                 this.setState({error: 'Details Not Found.'});
             }
@@ -81,7 +119,7 @@ class ArticleDetailView extends React.Component{
             const json = await req.json();
             if(json.items){
                 const page_views = json.items.sort((a,b) => b.views - a.views);
-                this.setState({page_views: page_views.slice(0,3)});
+                this.setState({page_views: page_views.slice(0,4)});
             }
         } catch (e) {
             console.error(e);
@@ -92,19 +130,18 @@ class ArticleDetailView extends React.Component{
         return (
             <div className='text-container'>
                {this.state.error && <div className='error-text'>{this.state.error}</div>}
-               {!this.state.title && !this.state.details && !this.state.error && <div><strong><span>Fetching Details...</span></strong></div>}
+               {!this.state.title && !this.state.details && !this.state.error && <div className='loading-text'><strong><span>Fetching Details...</span></strong></div>}
                {this.state.title && <div className='wiki-title'><strong>{this.state.title}</strong></div>}
-               {this.state.details && <div className='wiki-text'>{this.state.details}<br/>{!(this.state.showTwo) && <strong><span value={this.state.showTwo} onClick={this.showPartTwo} className='blue-text'>View more...</span></strong>}</div>}
-               {this.state.detailsPartTwo && this.state.showTwo && <><br/><div className='wiki-text'>{this.state.detailsPartTwo}<br/>{!(this.state.showThree) && <strong><span value={this.state.showThree} onClick={this.showPartThree} className='blue-text'>View more...</span></strong>}</div></>}
-               {this.state.detailsPartThree && this.state.showThree && <><br/><div className='wiki-text'>{this.state.detailsPartThree}<br/>{!(this.state.showViewsPerDay) && <strong><span value={this.state.showViewsPerDay} onClick={this.showViews} className='blue-text'>View more...</span></strong>}</div></>}
-               {this.state.page_views && this.state.showViewsPerDay && 
-                (<div>
-                {
-                    this.state.page_views.map((ele, index) => 
-                        <strong><span id={'date-' + ele.timestamp} key={'date-' + ele.timestamp} className='views-day wiki-text'>{(index+1) + '. ' + ele.timestamp.substring(0,4) + '/' + ele.timestamp.substring(4,6) + '/' + ele.timestamp.substring(6,8) + ' Views: ' + ele.views}</span><br/></strong>
-                    )
-                }
-                </div>)}
+               {this.state.details && <div className='wiki-text'><p>{this.state.details}</p>{!(this.state.showTwo) && <strong><span value={this.state.showTwo} onClick={this.showPartTwo} className='blue-text'>View more...</span></strong>}</div>}
+               {this.state.detailsPartTwo && this.state.showTwo && <><div className='wiki-text'><p>{this.state.detailsPartTwo}</p>{!(this.state.showThree) && <strong><span value={this.state.showThree} onClick={this.showPartThree} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartThree && this.state.showThree && <><div className='wiki-text'><p>{this.state.detailsPartThree}</p>{!(this.state.showFour) && <strong><span value={this.state.showFour} onClick={this.showPartFour} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartFour && this.state.showFour && <><div className='wiki-text'><p>{this.state.detailsPartFour}</p>{!(this.state.showFive) && <strong><span value={this.state.showFive} onClick={this.showPartFive} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartFive && this.state.showFive && <><div className='wiki-text'><p>{this.state.detailsPartFive}</p>{!(this.state.showSix) && <strong><span value={this.state.showSix} onClick={this.showPartSix} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartSix && this.state.showSix && <><div className='wiki-text'><p>{this.state.detailsPartSix}</p>{!(this.state.showSeven) && <strong><span value={this.state.showSeven} onClick={this.showPartSeven} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartSeven && this.state.showSeven && <><div className='wiki-text'><p>{this.state.detailsPartSeven}</p>{!(this.state.showEight) && <strong><span value={this.state.showEight} onClick={this.showPartEight} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartEight && this.state.showEight && <><div className='wiki-text'><p>{this.state.detailsPartEight}</p>{!(this.state.showNine) && <strong><span value={this.state.showNine} onClick={this.showPartNine} className='blue-text'>View more...</span></strong>}</div></>}
+               {this.state.detailsPartNine && this.state.showNine && <><div className='wiki-text'><p>{this.state.detailsPartNine}</p></div></>}
+               {this.state.page_views && <div className='page-views'><p className='wiki-text'>Dates Most Viewed this Month:</p> {this.state.page_views.map((ele, index) => <><span id={'date-' + ele.timestamp} key={'date-' + ele.timestamp} className='views-day wiki-text'>{ele.timestamp.substring(0,4) + '/' + ele.timestamp.substring(4,6) + '/' + ele.timestamp.substring(6,8) + ' Views: ' + ele.views}</span><br/></>)}</div>}
             </div>
         );
     }
