@@ -39,7 +39,33 @@ function CategorySearch(props){
                 props.results(articles, searchTerm);
                 setState({results: articles, error: undefined, subCats: subcats});
             }else{
-                setState({error: (<><span>Could not find Category in Wikipedia.</span><br/><span>Please update your search query and make sure that search is in {languageKey[props.language]}.</span></>)});
+                const urlTwo = `https://${props.language}.wikipedia.org/w/api.php?` +
+                new URLSearchParams({
+                    origin: '*',
+                    list: 'categorymembers',
+                    action: 'query',
+                    cmtitle: `Category:${searchTerm.toLowerCase()}`,
+                    cmlimit: 500,
+                    cmsort: 'timestamp',
+                    cmdir: 'desc',
+                    format: 'json',
+                });
+                try {
+                    const req = await fetch(urlTwo);
+                    const json = await req.json();
+                    if(json?.query?.categorymembers && json?.query?.categorymembers.length > 0){
+                        const articles = json.query.categorymembers;
+                        const subcats = articles.filter(a => a.title.includes(`${categoryMap[props.language]}:`));
+                        articles.sort((a,b) => a.title.includes(`${categoryMap[props.language]}:`) - b.title.includes(`${categoryMap[props.language]}:`));
+                        props.results(articles, searchTerm);
+                        setState({results: articles, error: undefined, subCats: subcats});
+                    }else{
+                        setState({error: (<><span>Could not find Category in Wikipedia.</span><br/><span>Please update your search query and make sure that search is in {languageKey[props.language]}.</span></>)});
+                    }
+                }catch(e){
+                    console.error(e);
+                    setState({error: 'Could not fetch Articles.'});
+                }
             }
         } catch (e) {
             console.error(e);
