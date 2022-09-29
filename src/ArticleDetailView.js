@@ -15,6 +15,7 @@ class ArticleDetailView extends React.Component{
         this.showPartEight = this.showPartEight.bind(this);
         this.showPartNine = this.showPartNine.bind(this);
         this.showViews = this.showViews.bind(this);
+        this.formatText = this.formatText.bind(this);
     }
 
     componentDidMount(){
@@ -65,6 +66,12 @@ class ArticleDetailView extends React.Component{
         this.setState({showViewsPerDay: true})
     }
 
+    formatText(text = []){
+        const seen = {};
+        const textContent = [...new Set(text)].map(ele => ele.replace(/\n/g, '')).filter((ele) => { if(!(ele in seen) && !(Object.keys(seen).toString().includes(ele))){seen[ele] = true; return true;}else{return false;}}).map(ele => ele + '  ');
+        return textContent;
+    }
+
     async getWikiPage(){
         const special_cases = {'CEO': 'Chief_executive_officer', 'Princess_Charlotte_of_Cornwall_and_Cambridge': 'Princess_Charlotte_of_Wales_(born_2015)', 'Meghan_Markle': 'Meghan,_Duchess_of_Sussex', 'Camilla,_Duchess_of_Cornwall': 'Camilla,_Queen_Consort', 'Camilla,_Queen_consort_of_the_United_Kingdom': 'Camilla,_Queen_Consort', 'Video_hosting_service': 'Online_video_platform', 'Viscus': 'Organ_(biology)'};
         const article_name = !(this.props.article in special_cases) ? this.props.article : special_cases[this.props.article];
@@ -82,18 +89,19 @@ class ArticleDetailView extends React.Component{
             if(json?.parse?.text){
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(json.parse.text['*'], 'text/html');
-                const elements = Array.from(doc.querySelectorAll('p, li, div, a')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('km²')) && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
+                const elements = Array.from(doc.querySelectorAll('p, li, div, a')).filter(ele => !(ele.innerText.includes('.mw-parser-output')) && !(ele.innerText.includes('[±]')) && !(ele.innerText.includes('JSTOR')) && !(ele.innerText.includes('km²')) && ele.className !== 'mw-empty-elt' && ele.textContent !== '' && ele.textContent !== 'Redirect to:');
                 const text = elements.map(ele => ele.textContent);
                 const offset = Math.floor(text.length/9);
-                const textContent = [...new Set(text.splice(0,offset))].map(ele => ele + '  ');
-                const textContentPartTwo = [...new Set(text.splice(offset, offset*2))].map(ele => ele + '  ');
-                const textContentPartThree = [...new Set(text.splice(offset*2, offset*3))].map(ele => ele + '  ');
-                const textContentPartFour = [...new Set(text.splice(offset*3, offset*4))].map(ele => ele + '  ');
-                const textContentPartFive = [...new Set(text.splice(offset*4, offset*5))].map(ele => ele + '  ');
-                const textContentPartSix = [...new Set(text.splice(offset*5, offset*6))].map(ele => ele + '  ')
-                const textContentPartSeven = [...new Set(text.splice(offset*6, offset*7))].map(ele => ele + '  ');
-                const textContentPartEight = [...new Set(text.splice(offset*7, offset*8))].map(ele => ele + '  ');
-                const textContentPartNine = [...new Set(text.splice(offset*8, offset*9))].map(ele => ele + '  ');
+                const content = this.formatText(text);
+                const textContent = content.slice(0, offset);
+                const textContentPartTwo = content.slice(offset, offset*2);
+                const textContentPartThree = content.slice(offset*2, offset*3);
+                const textContentPartFour = content.slice(offset*3, offset*4);
+                const textContentPartFive = content.slice(offset*4, offset*5);
+                const textContentPartSix = content.slice(offset*5, offset*6);
+                const textContentPartSeven = content.slice(offset*6, offset*7);
+                const textContentPartEight = content.slice(offset*7, offset*8);
+                const textContentPartNine = content.slice(offset*8, offset*9);
                 this.setState({title: json.parse.title, detailsPartNine: textContentPartNine, detailsPartEight: textContentPartEight, detailsPartSeven: textContentPartSeven, detailsPartSix: textContentPartSix, details: textContent, detailsPartTwo: textContentPartTwo, detailsPartThree: textContentPartThree, detailsPartFour: textContentPartFour, detailsPartFive: textContentPartFive, error: undefined});
             }else{
                 this.setState({error: 'Details Not Found.'});
