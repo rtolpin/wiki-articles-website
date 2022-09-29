@@ -22,7 +22,7 @@ function NavBar(props) {
     return (
         <Navbar style={{'opacity': state.opacity}} id='home-navigation' bg='light' fixed='top' expand='lg'>
             <Container>
-                <Navbar.Brand><a href={'https://' + props.language + '.wikipedia.org/wiki/'}><img className='small-logo' src='http://adigaskell.org/wp-content/uploads/2014/08/wikipedia-logo.jpg' alt='Wikipedia Articles'/></a><strong>Wikipedia Trending Articles</strong></Navbar.Brand>
+                <Navbar.Brand><a href={'https://' + props.language + '.wikipedia.org/wiki/'}><img className='small-logo' src='https://adigaskell.org/wp-content/uploads/2014/08/wikipedia-logo.jpg' alt='Wikipedia Articles'/></a><strong>Wikipedia Trending Articles</strong></Navbar.Brand>
             </Container>
         </Navbar>
     );

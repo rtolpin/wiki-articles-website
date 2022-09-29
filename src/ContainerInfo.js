@@ -72,7 +72,7 @@ function ContainerGrid(props){
     }, [details]);
 
     return(
-        <Container title='Articles' fluid>
+        <Container fluid>
             {display}
         </Container>
     );
