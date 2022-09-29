@@ -68,7 +68,7 @@ class ArticleDetailView extends React.Component{
 
     formatText(text = []){
         const seen = {};
-        const textContent = [...new Set(text)].map(ele => ele.replace(/\n/g, '')).filter((ele) => { if(!(ele in seen) && !(Object.keys(seen).toString().includes(ele))){seen[ele] = true; return true;}else{return false;}}).map(ele => ele + '  ');
+        const textContent = [...new Set(text)].map(ele => ele.replace(/\n/g, '')).filter((ele) => { if(!(ele in seen) && !(Object.keys(seen).toString().includes(ele))){seen[ele] = true; return true;}else{return false;}}).map(ele => (' ' + ele + ' ').replace(/([A-Z]*)([a-z]+)([)]*)([A-Z]{1})/g, '$1$2$3 $4'));
         return textContent;
     }
 

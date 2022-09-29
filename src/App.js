@@ -20,6 +20,7 @@ class App extends React.Component {
     this.setCurrentDate = this.setCurrentDate.bind(this);
     this.setNumResults = this.setNumResults.bind(this);
     this.setResultsFromCategorySearch = this.setResultsFromCategorySearch.bind(this);
+    this.emptySearch = this.emptySearch.bind(this);
   }
 
   componentDidMount(){
@@ -37,6 +38,7 @@ class App extends React.Component {
       return dateString;
     } else if (date instanceof String || typeof date === 'string'){
       const elements = date.split(orig_delimiter);
+      console.log(date);
       if(elements[2].length === 4){
         const dateString = elements[2] + replace_delimiter + elements[0] + replace_delimiter + elements[1];
         return dateString;
@@ -84,6 +86,14 @@ class App extends React.Component {
     this.setState({articles: articles, category: category, isCategorySearch: true});
   }
 
+  emptySearch(){
+    if(this.state.current_date){
+      this.getDataFetch(this.getDateFormat(String(this.state.current_date), '-'), this.state.country_code);
+    }else{
+      this.getDataFetch(this.getDateFormat(this.state.yesterday, '/'), this.state.country_code);
+    }
+  }
+
   render(){
     return (
       <div className='App'>
@@ -92,7 +102,7 @@ class App extends React.Component {
           <div className='align-selection'>
             <LanguageSelect changeLanguageSelection={this.changeLanguageSelection}/>
             <DateSelector title={'Start Date:'} yesterday={this.state.yesterday} fetchData={this.getDataFetch} formatDate={this.getDateFormat} language={this.state.country_code} setCurrentDate={this.setCurrentDate}/>
-            <CategorySearch language={this.state.country_code} results={this.setResultsFromCategorySearch}/>
+            <CategorySearch language={this.state.country_code} results={this.setResultsFromCategorySearch} emptySearch={this.emptySearch}/>
             <NumResultSelect articles={this.state.articles} language={this.state.country_code} setNumResults={this.setNumResults}/>
             {this.state.error ? <div className='error-message'><h4>{'Error fetching Wikipedia articles: ' + this.state.error}</h4></div> : null}
           </div>

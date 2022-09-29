@@ -56,6 +56,9 @@ function CategorySearch(props){
         if(state.text !== '' && state.text !== undefined){
             makeRequestCategories(state.text);
         }
+        if(state.text === '' || state.text === undefined){
+            props.emptySearch();
+        }
         if(state.text === undefined){
             setState({error: undefined});
         }
