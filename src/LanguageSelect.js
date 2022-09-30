@@ -29,6 +29,7 @@ function LanguageSelect(props){
                     <option value='pl'>Polish</option>
                     <option value='pa'>Punjabi</option>
                     <option value='pt'>Portuguese</option>
+                    <option value='ru'>Russian</option>
                     <option value='sr'>Serbian</option>
                     <option value='sv'>Swedish</option>
                     <option value='es'>Spanish</option>
