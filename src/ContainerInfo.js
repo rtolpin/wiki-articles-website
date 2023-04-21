@@ -16,7 +16,7 @@ function ContainerGrid(props){
     });
 
     const buttonLanguageMap = {'en': 'View Details', 'ar': 'عرض التفاصيل', 'af': 'Bekyk meer besonderhede', 'fr': 'Voir les détails', 'ka': 'დეტალების ნახვა', 'de': 'Details anzeigen', 'he': 'הצג פרטים', 'hi': 'विवरण देखें', 
-    'it': 'Visualizza dettagli', 'ja': '詳細を見る', 'ko': '세부 정보보기', 'fa': 'دیدن جزئیات', 'pl': 'Pokaż szczegóły', 'pa': 'ਵੇਰਵੇ ਵੇਖੋ', 'pt': 'Ver detalhes', 'sr': 'Приказ детаља', 'sv': 'Visa detaljer',
+    'it': 'Visualizza dettagli', 'ja': '詳細を見る', 'ko': '세부 정보보기', 'fa': 'دیدن جزئیات', 'pl': 'Pokaż szczegóły', 'pa': 'ਵੇਰਵੇ ਵੇਖੋ', 'pt': 'Ver detalhes', 'ru': 'Посмотреть детали', 'sr': 'Приказ детаља', 'sv': 'Visa detaljer',
     'es': 'Ver detalles', 'tr': 'Detayları göster', 'uk': 'Докладніше', 'uz': "Tafsilotlarni ko'rish", 'vi': 'Xem chi tiết', 'yi': 'View דעטאַילס', 'nl': 'Bekijk meer details', 'ce': 'Информаци', 'bg': 'Вижте още подробности'};
 
     const mapRows = (() => {

@@ -8,9 +8,9 @@ import Col from 'react-bootstrap/Col';
 function CategorySearch(props){
     const [state, setState] = useState({text: '', results: [], error: undefined, subCats: []});
 
-    const categoryMap = {'yi': 'קאַטעגאָריע', 'ar': 'فئة', 'fa': 'دسته بندی', 'af': 'Kategorie', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주', 'nl': 'Categorie', 'ka': 'კატეგორია', 'hi': 'श्रेणी', 'sr': 'Категорија', 'pa': 'ਸ਼੍ਰੇਣੀ', 'tr': 'Kategori', 'vi': 'Loại', 'ce': 'Категори', 'bg': 'Категория'};
+    const categoryMap = {'yi': 'קאַטעגאָריע', 'ar': 'فئة', 'fa': 'دسته بندی', 'af': 'Kategorie', 'en': 'Category', 'de': 'Kategorie', 'he': 'קטגוריה', 'fr': 'Catégorie', 'ru': 'категория', 'es': 'Categoría', 'it': 'Categoria', 'uk': 'Категорія', 'uz': 'Turkum', 'sv': 'Kategori', 'ja': 'カテゴリー', 'pt': 'Categoria', 'pl': 'Kategoria', 'ko': '범주', 'nl': 'Categorie', 'ka': 'კატეგორია', 'hi': 'श्रेणी', 'sr': 'Категорија', 'pa': 'ਸ਼੍ਰੇਣੀ', 'tr': 'Kategori', 'vi': 'Loại', 'ce': 'Категори', 'bg': 'Категория'};
 
-    const languageKey = {'yi': 'Yiddish', 'ar': 'Arabic', 'fa': 'Persian', 'af': 'Afrikaans', 'en': 'English', 'de': 'German', 'he': 'Hebrew', 'fr': 'French', 'es': 'Spanish', 'it': 'Italian', 'uk': 'Ukrainian', 'uz': 'Uzbek', 'sv': 'Swedish', 'ja': 'Japanese', 'pt': 'Portuguese', 'pl': 'Polish', 'ko': 'Korean', 'nl': 'Dutch', 'ka': 'Georgian', 'hi': 'Hindi', 'sr': 'Serbian', 'pa': 'Punjabi', 'tr': 'Turkish', 'vi': 'Vietnamese', 'ce': 'Chechen', 'bg': 'Bulgarian'};
+    const languageKey = {'yi': 'Yiddish', 'ar': 'Arabic', 'fa': 'Persian', 'af': 'Afrikaans', 'en': 'English', 'de': 'German', 'he': 'Hebrew', 'fr': 'French', 'ru': 'Russian', 'es': 'Spanish', 'it': 'Italian', 'uk': 'Ukrainian', 'uz': 'Uzbek', 'sv': 'Swedish', 'ja': 'Japanese', 'pt': 'Portuguese', 'pl': 'Polish', 'ko': 'Korean', 'nl': 'Dutch', 'ka': 'Georgian', 'hi': 'Hindi', 'sr': 'Serbian', 'pa': 'Punjabi', 'tr': 'Turkish', 'vi': 'Vietnamese', 'ce': 'Chechen', 'bg': 'Bulgarian'};
 
     useEffect(() => {
         setState({error: undefined, text: ''});
