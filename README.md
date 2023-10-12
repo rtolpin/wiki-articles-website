@@ -20,5 +20,7 @@ In the project directory, you can run:
 
 To run app locally:
 ### `npm run build`
-### `within the build folder: serve -s`
+cd into the **build** folder
+### `serve -s`
+
 
