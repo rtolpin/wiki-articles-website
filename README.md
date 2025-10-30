@@ -7,6 +7,7 @@ SAMPLE SCREENSHOTS FROM WEBSITE:
 
 <img width="1885" height="909" alt="Screenshot 2025-10-30 4 02 14 PM" src="https://github.com/user-attachments/assets/5c4bdd6a-25c9-43b1-8e07-d13c793d7cb6" />
 
+
 <img width="1885" height="909" alt="Screenshot 2025-10-30 4 02 05 PM" src="https://github.com/user-attachments/assets/a7bbf348-af34-45a9-a4fd-e9b453399968" />
 
 
