@@ -2,6 +2,8 @@
 
 # Documentation for API Endpoints
 
+##NOTE: ONLY WIKIPEDIA SEARCH BY CATEGORY IN ANY LANGUAGE FEATURE IS AVAILABLE AND FUNCTIONING. MUST TYPE IN THE SEARCH BOX IN THAT PARTICULAR LANGUAGE.
+
 **GET** Request to Fetch Articles with the Most Page Views for a Specific Day 
 **Response format:** **application/json** **returns json object containing array of articles**
 [https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/YYYY/MM/DD]
